@@ -13,11 +13,11 @@ def init_db():
     #     with open("backend/schema.sql") as f:
     #         conn.executescript(f.read())
 
-    # Build an absolute path to the schema file to prevent path reference drift
+                                                                    # Build an absolute path to the schema file to prevent path reference drift
     schema_path = os.path.join(BASE_DIR, "schema.sql")
     
-    with db_connection() as conn:       # Open and read the raw text contents of your external SQL file
+    with db_connection() as conn:                                   # Open and read the raw text contents of your external SQL file
         with open(schema_path, "r", encoding="utf-8") as f:         # Run all tables, constraints, and indices in one atomic batch execution
-            conn.executescript(f.read())            # The safety Context Manager automatically commits changes and locks down resource handles
+            conn.executescript(f.read())                            # The safety Context Manager automatically commits changes and locks down resource handles
 
 
