@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "Tab Tracker",
+    "version": "1.0.0",
+    "description":"Keeps tabs on your tabs. An automated local browser session manager.",
+    "action":{"default_popup":"popup.html","default_title":"view_session"},
+    "background":{"service_worker":"background.js"},
+    "permissions":["tabs"],
+    "host_permissions":["http://127.0.0.1:5000/*","<all_urls>"],
+    "commands": {
+    "panic_mode": {
+      "suggested_key": {"default": "Ctrl+Shift+X","mac": "Command+Shift+X"},
+      "description": "Instantly trigger Anti-Gravity Panic Mode"
+    }
+  }
+}

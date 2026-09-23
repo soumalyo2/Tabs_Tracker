@@ -59,6 +59,26 @@ class SessionModel:
                 "UPDATE sessions SET is_active = 0 WHERE last_active < ? AND is_active = 1", 
                 (cutoff_str,)
             )
+    @staticmethod
+    def delete_session(session_id):
+        """
+        Deletes a specific session. 
+        Because schema.sql uses ON DELETE CASCADE, all associated tabs 
+        in the 'tabs' table will be automatically destroyed by the database.
+        """
+        with db_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM sessions WHERE session_id = ?", (session_id,))
+
+    @staticmethod
+    def clear_all_records():
+        """
+        Wipes all tracking history completely. 
+        Deletes all sessions, which cascades down to wipe the tabs table as well.
+        """
+        with db_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM sessions")
 
 class TabModel:
     def __init__(self, id, session_id, url, title, fav_icon_url, visit_count, first_visited, last_visited):
